@@ -2,19 +2,39 @@
 const screen = document.querySelector(".result-display");
 const key = document.querySelectorAll(".key");
 const deleteKey = document.querySelector(".delete-key");
+const resetKey = document.querySelector(".reset-key");
+const optKey = document.querySelectorAll(".opt-key");
 
-const showNumbers = () => {};
-let value = "";
+let value = [];
 
 key.forEach((key, index) => {
   key.addEventListener("click", () => {
     const keyValue = key.dataset.value;
-    value = value + keyValue;
-    screen.value = value;
+    value.push(keyValue);
+    const formatted = value.join("");
+    screen.value = formatted;
   });
 });
 
-deleteKey.addEventListener("click", () => {
-  screen.value = "me";
+optKey.forEach((key, index) => {
+  key.addEventListener("click", () => {
+    const keyValue = key.dataset.value;
+    console.log(keyValue);
+    value.push(keyValue);
+    console.log(value);
+    const formatted = value.join("");
+    screen.value = formatted;
+  });
 });
-// screen.textContent = 2;
+
+resetKey.addEventListener("click", () => {
+  value = [];
+  screen.value = "";
+  console.log(value);
+});
+
+deleteKey.addEventListener("click", () => {
+  value.pop();
+  const formatted = value.join("");
+  screen.value = formatted;
+});
