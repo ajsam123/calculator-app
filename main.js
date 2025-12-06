@@ -28,6 +28,7 @@ optKey.forEach((key, index) => {
 });
 
 resetKey.addEventListener("click", () => {
+  console.log(value);
   value = [];
   screen.value = "";
   console.log(value);
@@ -38,3 +39,25 @@ deleteKey.addEventListener("click", () => {
   const formatted = value.join("");
   screen.value = formatted;
 });
+
+const evaluator = (value) => {
+  const operators = ["/", "x", "+", "-"];
+  while (value.includes("/") || value.includes("x")) {
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] === "/") {
+        const beforeNum = Number(value[i - 1]);
+        const afterNum = Number(value[i + 1]);
+        const divResult = beforeNum / afterNum;
+        value.splice(i - 1, 3, divResult);
+        break;
+      }
+      if (value[i] === "x") {
+        const beforeNum = Number(value[i - 1]);
+        const afterNum = Number(value[i + 1]);
+        const divResult = beforeNum * afterNum;
+        value.splice(i - 1, 3, divResult);
+        break;
+      }
+    }
+  }
+};
